@@ -8,6 +8,10 @@ import { blue, pink } from 'material-ui/colors';
 import Login from './pages/login';
 import Home from './pages/home';
 import Profile from './pages/profile';
+import Folder from './pages/folder';
+import Post from './pages/post';
+
+import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
@@ -18,8 +22,6 @@ const theme = createMuiTheme({
   },
 });
 
-// import registerServiceWorker from './registerServiceWorker';
-
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Router>
@@ -27,6 +29,8 @@ const App = () => (
         <Route exact path="/" component={Login} />
         <Route path="/cadastro" component={() => <h1>Test</h1>} />
         <Route path="/inicio" component={Home} />
+        <Route exact path="/sub/:subid" component={Folder} />
+        <Route path="/sub/:subid/:postid" component={Post} />
         <Route path="/perfil/:name" component={Profile} />
       </div>
     </Router>
@@ -34,4 +38,4 @@ const App = () => (
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
+registerServiceWorker();
