@@ -41,7 +41,7 @@ class Topbar extends Component {
           <Toolbar className={back || menu ? '' : classes.bar}>
             {
               back ?
-                <IconButton color="inherit" aria-label="Menu">
+                <IconButton onClick={() => this.props.history.goBack()} color="inherit" aria-label="Menu">
                   <Icon>arrow_back_ios</Icon>
                 </IconButton>
                 :

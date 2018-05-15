@@ -91,6 +91,7 @@ class Login extends Component {
           color="secondary"
           className={classes.register}
           variant="body2"
+          onClick={() => this.props.history.push('/registre-se')}
         >
           Não possuo uma conta.
         </Typography>
