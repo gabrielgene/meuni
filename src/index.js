@@ -8,6 +8,7 @@ import { blue, pink } from 'material-ui/colors';
 import Login from './pages/login';
 import Home from './pages/home';
 import Profile from './pages/profile';
+import Register from './pages/register';
 
 import './index.css';
 
@@ -27,6 +28,7 @@ const App = () => (
         <Route exact path="/" component={Login} />
         <Route path="/cadastro" component={() => <h1>Test</h1>} />
         <Route path="/inicio" component={Home} />
+        <Route path="/registre-se" component={Register} />
         <Route path="/perfil/:name" component={Profile} />
       </div>
     </Router>
