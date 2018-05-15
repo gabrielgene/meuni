@@ -8,12 +8,9 @@ import Topbar from '../../components/topbar';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Avatar from 'material-ui/Avatar';
-import List, { ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import { subs } from '../../utils/fakeData';
-import {Hidden} from 'material-ui'
 import Checkbox from 'material-ui/Checkbox';
 
 
@@ -236,7 +233,7 @@ class DotsMobileStepper extends React.Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { activeStep } = this.state;
     const isFinalStep = activeStep === 2;
 
