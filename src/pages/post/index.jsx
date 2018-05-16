@@ -42,7 +42,7 @@ class Post extends React.Component {
           />
         </div>
         <Typography className={this.props.classes.title} variant="subheading">
-          Comentários (42)
+          Comentários
         </Typography>
         <Divider />
         <div className={this.props.classes.content}>

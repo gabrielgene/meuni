@@ -85,12 +85,17 @@ class Post extends React.Component {
                   {number}
                 </Typography>
             }
-            <Typography className={classes.comment} variant="body2">
-              <IconButton aria-label="next">
-                <Icon>chat</Icon>
-              </IconButton>
-              {comments}
-            </Typography>
+            {
+              name ?
+                <Typography className={classes.comment} variant="body2">
+                  <IconButton aria-label="next">
+                    <Icon>chat</Icon>
+                  </IconButton>
+                  {comments}
+                </Typography>
+                :
+                <div />
+            }
           </CardActions>
         </Card>
         <Divider />
