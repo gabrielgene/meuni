@@ -17,40 +17,26 @@ import Checkbox from 'material-ui/Checkbox';
 const styles = {
   root: {
     width: '100%',
-    flexGrow: 1,
     position: 'fixed',
     bottom: 0,
-    height: '52px',
   },
   formWrapper: {
-    height: '80vh',
-    flexDirection: 'column',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  formField: {
-    width: '80%',
+    marginTop: 56,
+    padding: 24,
   },
   avatar: {
     width: 80,
     height: 80,
-    bottom: '32px',
   },
   selectSubs: {
-    top: '30px',
-    padding: '80px 16px 20px',
-    fontSize: '26px',
+    marginTop: 56,
+    paddingTop: 8,
+    padding: 8,
+    textAlign: 'center',
   },
   list: {
-    overflow: 'scroll',
-    height: '64vh',
-    paddingBottom: '50px',
+    marginBottom: 50,
   },
-  subItem: {
-    paddingTop: '24px',
-    paddingBottom: '24px'
-  }
 };
 
 const defaultAvatar = "data:image/jpeg;base64,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"
@@ -60,6 +46,11 @@ class DotsMobileStepper extends React.Component {
     activeStep: 0,
     avatarUrl: '',
     checked: [0],
+    user: '',
+    pass: '',
+    course: '',
+    name: '',
+    description: '',
   };
 
   handleNext = () => {
@@ -158,7 +149,7 @@ class DotsMobileStepper extends React.Component {
             id="avatarUrl"
             label="Url da imagem de perfil"
             autoComplete="off"
-            placeholder=""
+            placeholder="Ex: http://minhaimagemdeperfil.jpg"
             InputLabelProps={{
               shrink: true,
             }}
@@ -203,7 +194,7 @@ class DotsMobileStepper extends React.Component {
           <Typography
             color="primary"
             className={classes.selectSubs}
-            variant="display2"
+            variant="title"
           >
             Selecione os subdiretorios que deseja seguir.
           </Typography>

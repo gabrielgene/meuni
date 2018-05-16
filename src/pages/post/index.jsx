@@ -26,7 +26,7 @@ class Post extends React.Component {
 
     return (
       <div>
-        <Topbar menu title="Postagem" />
+        <Topbar back title="Postagem" />
         <div className={this.props.classes.root}>
           <PostItem
             id={id}
