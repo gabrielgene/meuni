@@ -13,7 +13,7 @@ import Folder from './pages/folder';
 import Configurations from './pages/configurations';
 import Post from './pages/post';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
@@ -23,6 +23,8 @@ const theme = createMuiTheme({
     secondary: pink,
   },
 });
+
+// registerServiceWorker();
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
@@ -42,4 +44,3 @@ const App = () => (
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();

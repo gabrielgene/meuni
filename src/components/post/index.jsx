@@ -49,6 +49,7 @@ class Post extends React.Component {
     return (
       <div>
         <Card onClick={() => !!subid ? history.push(`/sub/${subid}/${id}`) : ''}>
+        {/* <Card onClick={() => !!subid ? console.log(history) : ''}> */}
           <CardHeader
             title={name}
             subheader={userName}

@@ -7,6 +7,9 @@ import { withStyles } from 'material-ui/styles';
 import { posts, commentsFake } from '../../utils/fakeData';
 
 const styles = theme => ({
+  post: {
+    backgroundColor: '#f4f4f4',
+  },
   root: {
     marginTop: theme.spacing.unit * 7,
   },
@@ -25,7 +28,7 @@ class Post extends React.Component {
     const { id, name, userName, avatarUrl, post, likes, comments } = posts[this.props.match.params.postid];
 
     return (
-      <div>
+      <div className={this.props.classes.post}>
         <Topbar back title="Postagem" />
         <div className={this.props.classes.root}>
           <PostItem

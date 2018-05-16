@@ -6,11 +6,6 @@ import TextField from 'material-ui/TextField';
 import { withStyles } from 'material-ui/styles';
 
 const styles = {
-  root: {
-    width: '100%',
-    position: 'fixed',
-    bottom: 0,
-  },
   formWrapper: {
     marginTop: 56,
     padding: 24,

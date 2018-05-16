@@ -68,6 +68,7 @@ export const posts = [
           utilizado desde o século XVI.`,
     likes: 8,
     comments: 17,
+    subid: 1,
   },
   {
     id: 1,
@@ -79,6 +80,7 @@ export const posts = [
           utilizado desde o século XVI.`,
     likes: 42,
     comments: 42,
+    subid: 2,
   },
   {
     id: 2,
@@ -90,6 +92,7 @@ export const posts = [
           utilizado desde o século XVI.`,
     likes: 89,
     comments: 1,
+    subid: 3,
   },
 ];
 

@@ -10,7 +10,7 @@ import { subs } from '../../utils/fakeData';
 
 const styles = theme => ({
   list: {
-    marginTop: theme.spacing.unit*7,
+    marginTop: theme.spacing.unit * 7,
   }
 });
 
@@ -25,7 +25,7 @@ const Home = ({ classes, history }) => (
             <ListItem button onClick={() => history.push(`/sub/${s.id}`)}>
               <ListItemText primary={s.name} />
               <ListItemSecondaryAction>
-                <IconButton aria-label="next">
+                <IconButton aria-label="next" onClick={() => history.push(`/sub/${s.id}`)}>
                   <Icon>navigate_next</Icon>
                 </IconButton>
               </ListItemSecondaryAction>
