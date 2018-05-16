@@ -83,21 +83,36 @@ class Profile extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer dir={theme.direction}>
-            {
-              posts.map(p => (
-                <PostItem
-                  key={p.id}
-                  id={p.id}
-                  name={p.name}
-                  userName={p.userName}
-                  avatarUrl={p.avatarUrl}
-                  post={p.post}
-                  likes={p.likes}
-                  comments={p.comments}
-                  subid={p.subid}
-                />
-              ))
-            }
+            <PostItem
+              id={posts[0].id}
+              name={posts[0].name}
+              userName={posts[0].userName}
+              avatarUrl={posts[0].avatarUrl}
+              post={posts[0].post}
+              likes={posts[0].likes}
+              comments={posts[0].comments}
+              subid={posts[0].subid}
+            />
+            <PostItem
+              id={posts[0].id}
+              name={posts[0].name}
+              userName={posts[0].userName}
+              avatarUrl={posts[0].avatarUrl}
+              post={posts[0].post}
+              likes={posts[0].likes}
+              comments={posts[0].comments}
+              subid={posts[0].subid}
+            />
+            <PostItem
+              id={posts[0].id}
+              name={posts[0].name}
+              userName={posts[0].userName}
+              avatarUrl={posts[0].avatarUrl}
+              post={posts[0].post}
+              likes={posts[0].likes}
+              comments={posts[0].comments}
+              subid={posts[0].subid}
+            />
           </TabContainer>
           <TabContainer dir={theme.direction}>
             <List className={classes.list}>

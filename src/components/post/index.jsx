@@ -49,7 +49,6 @@ class Post extends React.Component {
     return (
       <div>
         <Card onClick={() => !!subid ? history.push(`/sub/${subid}/${id}`) : ''}>
-        {/* <Card onClick={() => !!subid ? console.log(history) : ''}> */}
           <CardHeader
             title={name}
             subheader={userName}
@@ -58,9 +57,16 @@ class Post extends React.Component {
             }
           />
           <CardContent className={classes.content}>
-            <Typography component="p">
-              {post}
-            </Typography>
+            {
+              name ?
+                <Typography component="p">
+                  {post}
+                </Typography>
+                :
+                <Typography component="p" variant="caption">
+                  {post}
+                </Typography>
+            }
           </CardContent>
           <CardActions disableActionSpacing>
             {

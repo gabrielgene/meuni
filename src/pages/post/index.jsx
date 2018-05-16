@@ -41,8 +41,8 @@ class Post extends React.Component {
             comments={comments}
           />
         </div>
-        <Typography className={this.props.classes.title} variant="title">
-          Comentários
+        <Typography className={this.props.classes.title} variant="subheading">
+          Comentários (42)
         </Typography>
         <Divider />
         <div className={this.props.classes.content}>
@@ -51,7 +51,6 @@ class Post extends React.Component {
               <PostItem
                 key={c.id}
                 id={c.id}
-                name={c.name}
                 userName={c.userName}
                 avatarUrl={c.avatarUrl}
                 post={c.post}
