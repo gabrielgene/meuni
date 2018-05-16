@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider } from 'material-ui/styles';
 import { createMuiTheme } from 'material-ui/styles';
 import { blue, pink } from 'material-ui/colors';
@@ -24,12 +24,11 @@ const theme = createMuiTheme({
   },
 });
 
-// registerServiceWorker();
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Router>
-      <div>
+      <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/cadastro" component={() => <h1>Test</h1>} />
         <Route path="/inicio" component={Home} />
@@ -38,9 +37,10 @@ const App = () => (
         <Route path="/registre-se" component={Register} />
         <Route path="/perfil/:name" component={Profile} />
         <Route path="/configuracoes" component={Configurations} />
-      </div>
+      </Switch>
     </Router>
   </MuiThemeProvider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));
+// registerServiceWorker();
