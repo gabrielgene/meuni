@@ -16,7 +16,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   },
   button: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 2,
   },
   register: {
     marginTop: theme.spacing.unit * 12,

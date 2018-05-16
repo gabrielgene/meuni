@@ -10,6 +10,7 @@ import Home from './pages/home';
 import Profile from './pages/profile';
 import Register from './pages/register';
 import Folder from './pages/folder';
+import Configurations from './pages/configurations';
 import Post from './pages/post';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -34,6 +35,7 @@ const App = () => (
         <Route path="/sub/:subid/:postid" component={Post} />
         <Route path="/registre-se" component={Register} />
         <Route path="/perfil/:name" component={Profile} />
+        <Route path="/configuracoes" component={Configurations} />
       </div>
     </Router>
   </MuiThemeProvider>

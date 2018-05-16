@@ -89,7 +89,7 @@ class Topbar extends Component {
                 </ListItemIcon>
                 <ListItemText primary="Perfil" />
               </ListItem>
-              <ListItem onClick={() => history.push('/perfil/gabrielgene')}>
+              <ListItem onClick={() => history.push('/configuracoes')}>
                 <ListItemIcon>
                   <Icon>build</Icon>
                 </ListItemIcon>
