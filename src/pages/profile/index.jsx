@@ -1,7 +1,7 @@
 import React from 'react';
 import Topbar from '../../components/topbar';
 import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader } from 'material-ui/Card';
+import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import PostItem from '../../components/post';
 import Avatar from 'material-ui/Avatar';
@@ -23,8 +23,12 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 7,
   },
   content: {
-    marginTop: theme.spacing.unit * 23,
+    marginTop: theme.spacing.unit * 26,
   },
+  description: {
+    paddingTop: 0,
+    paddingBottom: '8px !important',
+  }
 });
 
 function TabContainer({ children, dir }) {
@@ -65,6 +69,11 @@ class Profile extends React.Component {
                 <Avatar src="https://avatars3.githubusercontent.com/u/19671668?s=460&v=4" alt="image" />
               }
             />
+            <CardContent className={classes.description}>
+              <Typography component="p">
+                Essa é a descrição do meu perfil.
+              </Typography>
+            </CardContent>
           </Card>
 
           <Tabs
@@ -75,6 +84,7 @@ class Profile extends React.Component {
             <Tab label="Postagens" />
             <Tab label="Diretórios" />
           </Tabs>
+
         </AppBar>
         <SwipeableViews
           className={classes.content}
