@@ -11,7 +11,7 @@ import Icon from 'material-ui/Icon';
 import { withRouter } from 'react-router';
 import Divider from 'material-ui/Divider';
 import SwipeableViews from 'react-swipeable-views';
-import { Tabs, Tab, AppBar, Typography } from 'material-ui';
+import { Tabs, Tab, Typography } from 'material-ui';
 
 const styles = theme => ({
   root: {
@@ -23,7 +23,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 7,
   },
   content: {
-    marginTop: theme.spacing.unit * 26,
+    marginTop: theme.spacing.unit,
   },
   description: {
     paddingTop: 0,
@@ -59,33 +59,33 @@ class Profile extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="fixed" color="primary">
-          <Topbar menu title="Perfil" />
-          <Card className={classes.profileInfo} raised>
-            <CardHeader
-              title="Gabriel Genê"
-              subheader="@gabrielgene"
-              avatar={
-                <Avatar src="https://avatars3.githubusercontent.com/u/19671668?s=460&v=4" alt="image" />
-              }
-            />
-            <CardContent className={classes.description}>
-              <Typography component="p">
-                Essa é a descrição do meu perfil.
+        <Topbar menu title="Perfil" />
+        <Card className={classes.profileInfo} raised>
+          <CardHeader
+            title="Gabriel Genê"
+            subheader="@gabrielgene"
+            avatar={
+              <Avatar src="https://avatars3.githubusercontent.com/u/19671668?s=460&v=4" alt="image" />
+            }
+          />
+          <CardContent className={classes.description}>
+            <Typography component="p">
+              Essa é a descrição do meu perfil.
               </Typography>
-            </CardContent>
-          </Card>
-
+          </CardContent>
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
             fullWidth
+            indicatorColor="primary"
+            textColor="primary"
           >
             <Tab label="Postagens" />
             <Tab label="Diretórios" />
           </Tabs>
+        </Card>
 
-        </AppBar>
+
         <SwipeableViews
           className={classes.content}
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
