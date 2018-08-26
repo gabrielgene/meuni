@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const Home = ({ match, classes, history }) => (
   <div>
-    <Topbar menu title="Feed de postagens" />
+    <Topbar menu title="Feed" />
     <List className={classes.list}>
       <Divider />
       {

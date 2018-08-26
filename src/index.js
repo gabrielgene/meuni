@@ -11,9 +11,10 @@ import Profile from './pages/profile';
 import Register from './pages/register';
 import Folder from './pages/folder';
 import Configurations from './pages/configurations';
+import Notifications from './pages/notifications';
 import Post from './pages/post';
 
-// import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
@@ -23,7 +24,6 @@ const theme = createMuiTheme({
     secondary: pink,
   },
 });
-
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
@@ -37,10 +37,11 @@ const App = () => (
         <Route path="/registre-se" component={Register} />
         <Route path="/perfil/:name" component={Profile} />
         <Route path="/configuracoes" component={Configurations} />
+        <Route path="/notificacoes" component={Notifications} />
       </Switch>
     </Router>
   </MuiThemeProvider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
+registerServiceWorker();

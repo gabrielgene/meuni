@@ -59,7 +59,7 @@ class Post extends React.Component {
   openPost = () => {
     const { history, id, match } = this.props;
     const postId = id || match.params.postId
-    this.props.history.push(`/post/${id}`)
+    history.push(`/post/${postId}`)
   }
 
   openFolder = e => {
