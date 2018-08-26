@@ -45,7 +45,14 @@ class Topbar extends Component {
   };
 
   render() {
-    const { back, menu, title, classes, history } = this.props;
+    const {
+      back,
+      menu,
+      title,
+      classes,
+      history,
+      withoutNotification,
+    } = this.props;
     const { open } = this.state;
     return (
       <div>
@@ -68,15 +75,20 @@ class Topbar extends Component {
             <Typography variant="title" color="inherit">
               {title}
             </Typography>
-            <IconButton
-              color="inherit"
-              className={classes.notification}
-              onClick={() => history.push('/notificacoes')}
-            >
-              <Badge color="secondary" badgeContent={2}>
-                <Icon>notifications</Icon>
-              </Badge>
-            </IconButton>
+            {
+              withoutNotification ?
+                <div />
+                :
+                <IconButton
+                  color="inherit"
+                  className={classes.notification}
+                  onClick={() => history.push('/notificacoes')}
+                >
+                  <Badge color="secondary" badgeContent={2}>
+                    <Icon>notifications</Icon>
+                  </Badge>
+                </IconButton>
+            }
           </Toolbar>
         </AppBar>
         <Drawer open={open} onClose={this.toggleDrawer}>
