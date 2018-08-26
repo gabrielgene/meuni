@@ -1,12 +1,19 @@
 import React from 'react';
-import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Divider from 'material-ui/Divider';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
 import { withRouter } from 'react-router';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Chip from '@material-ui/core/Chip';
+import Divider from '@material-ui/core/Divider';
+import Icon from '@material-ui/core/Icon';
+import { withStyles } from '@material-ui/core/styles';
+
+import { subs } from '../../utils/fakeData';
 
 const styles = theme => ({
   card: {
@@ -19,6 +26,13 @@ const styles = theme => ({
   comment: {
     marginLeft: theme.spacing.unit * 2,
   },
+  cardHeader: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  chip: {
+    marginLeft: theme.spacing.unit * 2,
+  }
 });
 
 
@@ -42,20 +56,52 @@ class Post extends React.Component {
     });
   }
 
+  openPost = () => {
+    const { history, id, match } = this.props;
+    const postId = id || match.params.postId
+    this.props.history.push(`/post/${id}`)
+  }
+
+  openFolder = e => {
+    const { history, subId } = this.props;
+    history.push(`/sub/${subId}`);
+    e.stopPropagation();
+  }
+
   render() {
-    const { classes, history, id, name, userName, post, comments, avatarUrl, subid } = this.props;
+    const {
+      classes,
+      name,
+      userName,
+      post,
+      comments,
+      avatarUrl,
+      subId,
+    } = this.props;
     const { like, number } = this.state;
 
     return (
       <div>
-        <Card onClick={() => !!subid ? history.push(`/sub/${subid}/${id}`) : ''}>
-          <CardHeader
-            title={name}
-            subheader={userName}
-            avatar={
-              <Avatar src={avatarUrl} alt="image" />
+        <Card onClick={this.openPost}>
+          <div className={classes.cardHeader}>
+            <CardHeader
+              title={name}
+              subheader={userName}
+              avatar={
+                <Avatar src={avatarUrl} alt="image" />
+              }
+            />
+            {name ?
+              <Chip
+                className={classes.chip}
+                label={subs[subId].name}
+                // color="secondary"
+                // color="primary"
+                onClick={this.openFolder}
+              />
+              : <div />
             }
-          />
+          </div>
           <CardContent className={classes.content}>
             {
               name ?

@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
-import { withStyles } from 'material-ui/styles';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
-import Avatar from 'material-ui/Avatar';
-import Icon from 'material-ui/Icon';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { withRouter } from 'react-router';
+
+import AppBar from '@material-ui/core/AppBar';
+import { withStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
+import Icon from '@material-ui/core/Icon';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = theme => ({
   bar: {
@@ -18,6 +22,9 @@ const styles = theme => ({
   },
   menuList: {
     width: 250,
+  },
+  logo: {
+    fontFamily: 'Jua',
   }
 });
 
@@ -66,7 +73,7 @@ class Topbar extends Component {
           >
             <AppBar position="static">
               <Toolbar>
-                <Typography variant="title" color="inherit">
+                <Typography variant="title" color="inherit" className={classes.logo}>
                   MeUni
                 </Typography>
               </Toolbar>

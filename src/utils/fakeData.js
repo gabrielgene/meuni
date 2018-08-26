@@ -72,6 +72,42 @@ export const posts = [
   },
   {
     id: 1,
+    name: 'Gabriel Genê',
+    userName: '@gabrielgene',
+    avatarUrl: 'https://avatars3.githubusercontent.com/u/19671668?s=460&v=4',
+    post: `Lorem Ipsum é simplesmente uma simulação de texto
+          da indústria tipográfica e de impressos, e vem sendo
+          utilizado desde o século XVI.`,
+    likes: 8,
+    comments: 17,
+    subid: 5,
+  },
+  {
+    id: 2,
+    name: 'Gabriel Genê',
+    userName: '@gabrielgene',
+    avatarUrl: 'https://avatars3.githubusercontent.com/u/19671668?s=460&v=4',
+    post: `Lorem Ipsum é simplesmente uma simulação de texto
+          da indústria tipográfica e de impressos, e vem sendo
+          utilizado desde o século XVI.`,
+    likes: 8,
+    comments: 17,
+    subid: 3,
+  },
+  {
+    id: 3,
+    name: 'Gabriel Genê',
+    userName: '@gabrielgene',
+    avatarUrl: 'https://avatars3.githubusercontent.com/u/19671668?s=460&v=4',
+    post: `Lorem Ipsum é simplesmente uma simulação de texto
+          da indústria tipográfica e de impressos, e vem sendo
+          utilizado desde o século XVI.`,
+    likes: 8,
+    comments: 17,
+    subid: 7,
+  },
+  {
+    id: 4,
     name: 'Ravi',
     userName: '@ravi',
     avatarUrl: 'https://avatars0.githubusercontent.com/u/22510441?s=460&v=4',
@@ -80,10 +116,10 @@ export const posts = [
           utilizado desde o século XVI.`,
     likes: 42,
     comments: 42,
-    subid: 2,
+    subid: 1,
   },
   {
-    id: 2,
+    id: 5,
     name: 'Corcel',
     userName: '@corcel',
     avatarUrl: 'https://scontent.fssa2-1.fna.fbcdn.net/v/t1.0-1/p160x160/11390119_839853519397179_817382636463239679_n.jpg?_nc_cat=0&oh=5cc9b1f790959cc25ded7d3fe4aeeec2&oe=5B830799',
@@ -92,7 +128,19 @@ export const posts = [
           utilizado desde o século XVI.`,
     likes: 89,
     comments: 1,
-    subid: 3,
+    subid: 1,
+  },
+  {
+    id: 6,
+    name: 'Gabriel Genê',
+    userName: '@gabrielgene',
+    avatarUrl: 'https://avatars3.githubusercontent.com/u/19671668?s=460&v=4',
+    post: `Lorem Ipsum é simplesmente uma simulação de texto
+          da indústria tipográfica e de impressos, e vem sendo
+          utilizado desde o século XVI.`,
+    likes: 8,
+    comments: 17,
+    subid: 1,
   },
 ];
 

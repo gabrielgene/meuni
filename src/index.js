@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { MuiThemeProvider } from 'material-ui/styles';
-import { createMuiTheme } from 'material-ui/styles';
-import { blue, pink } from 'material-ui/colors';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { blue, pink } from '@material-ui/core/colors';
 
 import Login from './pages/login';
 import Home from './pages/home';
@@ -32,8 +32,8 @@ const App = () => (
         <Route exact path="/" component={Login} />
         <Route path="/cadastro" component={() => <h1>Test</h1>} />
         <Route path="/inicio" component={Home} />
-        <Route exact path="/sub/:subid" component={Folder} />
-        <Route path="/sub/:subid/:postid" component={Post} />
+        <Route exact path="/sub/:subId" component={Folder} />
+        <Route path="/post/:postId" component={Post} />
         <Route path="/registre-se" component={Register} />
         <Route path="/perfil/:name" component={Profile} />
         <Route path="/configuracoes" component={Configurations} />

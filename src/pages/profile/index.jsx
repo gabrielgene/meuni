@@ -1,17 +1,26 @@
 import React from 'react';
-import Topbar from '../../components/topbar';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardContent } from 'material-ui/Card';
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import PostItem from '../../components/post';
-import Avatar from 'material-ui/Avatar';
-import { posts, subs } from '../../utils/fakeData';
-import IconButton from 'material-ui/IconButton';
-import Icon from 'material-ui/Icon';
-import { withRouter } from 'react-router';
-import Divider from 'material-ui/Divider';
 import SwipeableViews from 'react-swipeable-views';
-import { Tabs, Tab, Typography } from 'material-ui';
+import { withRouter } from 'react-router';
+
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
+import Divider from '@material-ui/core/Divider';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+
+import Topbar from '../../components/topbar';
+import PostItem from '../../components/post';
+import { posts, subs } from '../../utils/fakeData';
 
 const styles = theme => ({
   root: {
@@ -101,7 +110,7 @@ class Profile extends React.Component {
               post={posts[0].post}
               likes={posts[0].likes}
               comments={posts[0].comments}
-              subid={posts[0].subid}
+              subId={posts[0].subid}
             />
             <PostItem
               id={posts[0].id}
@@ -111,7 +120,7 @@ class Profile extends React.Component {
               post={posts[0].post}
               likes={posts[0].likes}
               comments={posts[0].comments}
-              subid={posts[0].subid}
+              subId={posts[0].subid}
             />
             <PostItem
               id={posts[0].id}
@@ -121,7 +130,7 @@ class Profile extends React.Component {
               post={posts[0].post}
               likes={posts[0].likes}
               comments={posts[0].comments}
-              subid={posts[0].subid}
+              subId={posts[0].subid}
             />
           </TabContainer>
           <TabContainer dir={theme.direction}>

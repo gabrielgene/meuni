@@ -1,12 +1,11 @@
 import React from 'react';
 import Topbar from '../../components/topbar';
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import Icon from 'material-ui/Icon';
-import { withStyles } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
+import List from '@material-ui/core/List';
+import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import { withRouter } from 'react-router';
-import { subs } from '../../utils/fakeData';
+import { posts } from '../../utils/fakeData';
+import Post from '../../components/post';
 
 const styles = theme => ({
   list: {
@@ -14,24 +13,24 @@ const styles = theme => ({
   }
 });
 
-const Home = ({ classes, history }) => (
+const Home = ({ match, classes, history }) => (
   <div>
-    <Topbar menu title="MeUni" />
+    <Topbar menu title="Feed de postagens" />
     <List className={classes.list}>
       <Divider />
       {
-        subs.map((s, idx) => (
-          <div key={idx}>
-            <ListItem button onClick={() => history.push(`/sub/${s.id}`)}>
-              <ListItemText primary={s.name} />
-              <ListItemSecondaryAction>
-                <IconButton aria-label="next" onClick={() => history.push(`/sub/${s.id}`)}>
-                  <Icon>navigate_next</Icon>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-          </div>
+        posts.map( p => (
+          <Post
+            key={p.id}
+            id={p.id}
+            name={p.name}
+            username={p.userName}
+            avatarUrl={p.avatarUrl}
+            post={p.post}
+            likes={p.likes}
+            comments={p.comments}
+            subId={p.subid}
+          />
         ))
       }
     </List>

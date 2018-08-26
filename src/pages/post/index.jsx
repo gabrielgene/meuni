@@ -1,9 +1,9 @@
 import React from 'react';
 import Topbar from '../../components/topbar';
 import PostItem from '../../components/post';
-import Typography from 'material-ui/Typography';
-import Divider from 'material-ui/Divider';
-import { withStyles } from 'material-ui/styles';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import { withStyles } from '@material-ui/core/styles';
 import { posts, commentsFake } from '../../utils/fakeData';
 
 const styles = theme => ({
@@ -25,7 +25,16 @@ class Post extends React.Component {
   }
 
   render() {
-    const { id, name, userName, avatarUrl, post, likes, comments } = posts[this.props.match.params.postid];
+    const {
+      id,
+      name,
+      userName,
+      avatarUrl,
+      post,
+      likes,
+      comments,
+      subid,
+    } = posts[this.props.match.params.postId];
 
     return (
       <div className={this.props.classes.post}>
@@ -39,6 +48,7 @@ class Post extends React.Component {
             post={post}
             likes={likes}
             comments={comments}
+            subId={subid}
           />
         </div>
         <Typography className={this.props.classes.title} variant="subheading">

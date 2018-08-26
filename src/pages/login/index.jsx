@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
@@ -12,8 +12,9 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
   },
   title: {
-    marginTop: theme.spacing.unit * 12,
+    marginTop: theme.spacing.unit * 8,
     marginBottom: theme.spacing.unit * 2,
+    fontFamily: 'Jua',
   },
   button: {
     marginTop: theme.spacing.unit * 2,
@@ -47,7 +48,7 @@ class Login extends Component {
         <Typography
           color="primary"
           className={classes.title}
-          variant="display2"
+          variant="display3"
         >
           MeUni
         </Typography>

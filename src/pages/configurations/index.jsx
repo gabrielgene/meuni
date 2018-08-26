@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import Topbar from '../../components/topbar';
-import Avatar from 'material-ui/Avatar';
-import TextField from 'material-ui/TextField';
-import { withStyles } from 'material-ui/styles';
+import Avatar from '@material-ui/core/Avatar';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   formWrapper: {

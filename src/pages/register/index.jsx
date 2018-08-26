@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import MobileStepper from 'material-ui/MobileStepper';
-import Icon from 'material-ui/Icon';
-import Button from 'material-ui/Button';
+import { withStyles } from '@material-ui/core/styles';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
 import Topbar from '../../components/topbar';
-import Typography from 'material-ui/Typography';
-import TextField from 'material-ui/TextField';
-import Avatar from 'material-ui/Avatar';
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
+import List, { ListItem, ListItemText, ListItemSecondaryAction } from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
 import { subs } from '../../utils/fakeData';
-import Checkbox from 'material-ui/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 const styles = {
