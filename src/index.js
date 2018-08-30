@@ -12,6 +12,7 @@ import Register from './pages/register';
 import Folder from './pages/folder';
 import Configurations from './pages/configurations';
 import Notifications from './pages/notifications';
+import Search from './pages/search';
 import Post from './pages/post';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -38,6 +39,7 @@ const App = () => (
         <Route path="/perfil/:name" component={Profile} />
         <Route path="/configuracoes" component={Configurations} />
         <Route path="/notificacoes" component={Notifications} />
+        <Route path="/busca" component={Search} />
       </Switch>
     </Router>
   </MuiThemeProvider>

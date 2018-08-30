@@ -10,11 +10,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
+import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
+import AppSearch from '../app-search';
 
 const styles = theme => ({
   bar: {
@@ -27,10 +30,41 @@ const styles = theme => ({
   logo: {
     fontFamily: 'Jua',
   },
-  notification: {
-    position: 'absolute',
-    right: theme.spacing.unit * 2,
-  }
+  actions: {
+    width: '100%',
+    textAlign: 'end',
+  },
+  bootstrapRoot: {
+    padding: 0,
+    'label + &': {
+      marginTop: theme.spacing.unit * 3,
+    },
+  },
+  bootstrapInput: {
+    borderRadius: 4,
+    backgroundColor: theme.palette.common.white,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 12px',
+    width: 'calc(100% - 24px)',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
 });
 
 class Topbar extends Component {
@@ -75,20 +109,47 @@ class Topbar extends Component {
             <Typography variant="title" color="inherit">
               {title}
             </Typography>
-            {
-              withoutNotification ?
-                <div />
-                :
-                <IconButton
-                  color="inherit"
-                  className={classes.notification}
-                  onClick={() => history.push('/notificacoes')}
-                >
-                  <Badge color="secondary" badgeContent={2}>
-                    <Icon>notifications</Icon>
-                  </Badge>
-                </IconButton>
-            }
+            <AppSearch />
+            {/* <TextField
+              defaultValue="react-bootstrap"
+              id="bootstrap-input"
+              InputProps={{
+                disableUnderline: true,
+                classes: {
+                  root: classes.bootstrapRoot,
+                  input: classes.bootstrapInput,
+                },
+              }}
+            /> */}
+            <div className={classes.actions}>
+              {
+                withoutNotification ?
+                  <div />
+                  :
+                  <IconButton
+                    color="inherit"
+                    className={classes.notification}
+                    onClick={() => history.push('/busca')}
+                  >
+                    <Icon>search</Icon>
+                  </IconButton>
+              }
+              {
+                withoutNotification ?
+                  <div />
+                  :
+                  <IconButton
+                    color="inherit"
+                    className={classes.notification}
+                    onClick={() => history.push('/notificacoes')}
+                  >
+                    <Badge color="secondary" badgeContent={2}>
+                      <Icon>notifications</Icon>
+                    </Badge>
+                  </IconButton>
+              }
+
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer open={open} onClose={this.toggleDrawer}>
@@ -106,7 +167,7 @@ class Topbar extends Component {
               </Toolbar>
             </AppBar>
             <List component="nav" className={classes.menuList}>
-              <ListItem onClick={() => history.push('/perfil/gabrielgene')}>
+              <ListItem button onClick={() => history.push('/perfil/gabrielgene')}>
                 <Avatar src="https://avatars3.githubusercontent.com/u/19671668?s=460&v=4" alt="gabrielgene" />
                 <ListItemText primary="Gabriel Genê" secondary="@gabrielgene" />
               </ListItem>
@@ -117,19 +178,19 @@ class Topbar extends Component {
                 </ListItemIcon>
                 <ListItemText primary="Inicio" />
               </ListItem>
-              <ListItem onClick={() => history.push('/perfil/gabrielgene')}>
+              <ListItem button onClick={() => history.push('/perfil/gabrielgene')}>
                 <ListItemIcon>
                   <Icon>person</Icon>
                 </ListItemIcon>
                 <ListItemText primary="Perfil" />
               </ListItem>
-              <ListItem onClick={() => history.push('/notificacoes')}>
+              <ListItem button onClick={() => history.push('/notificacoes')}>
                 <ListItemIcon>
                   <Icon>notifications</Icon>
                 </ListItemIcon>
                 <ListItemText primary="Notificações" />
               </ListItem>
-              <ListItem onClick={() => history.push('/configuracoes')}>
+              <ListItem button onClick={() => history.push('/configuracoes')}>
                 <ListItemIcon>
                   <Icon>build</Icon>
                 </ListItemIcon>
