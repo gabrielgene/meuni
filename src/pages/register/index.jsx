@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import Cookies from 'js-cookie';
 
 import { withStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -17,6 +18,8 @@ import Divider from '@material-ui/core/Divider';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
+import { register } from '../../fetches';
+
 import Topbar from '../../components/topbar';
 import { subs } from '../../utils/fakeData';
 
@@ -188,13 +191,14 @@ const components = {
 class DotsMobileStepper extends React.Component {
   state = {
     activeStep: 0,
-    avatarUrl: '',
-    checked: [0, 3, 5],
     user: '',
     pass: '',
-    course: '',
     name: '',
+    avatarUrl: '',
+    course: '',
+    email: '',
     description: '',
+    directories: [0, 3, 5],
   };
 
   handleNext = () => {
@@ -222,9 +226,9 @@ class DotsMobileStepper extends React.Component {
   };
 
   handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+    const { directories } = this.state;
+    const currentIndex = directories.indexOf(value);
+    const newChecked = [...directories];
 
     if (currentIndex === -1) {
       newChecked.push(value);
@@ -233,12 +237,30 @@ class DotsMobileStepper extends React.Component {
     }
 
     this.setState({
-      checked: newChecked,
+      directories: newChecked,
     });
+  };
+
+  handleSubmit = async () => {
+    const user = await register(this.state);
+    console.log({ user })
+    const userId = Cookies.get('userId');
+    console.log({ userId })
+    this.props.history.push('/inicio')
   };
 
   renderStep() {
     const { classes, theme } = this.props;
+    const {
+      user,
+      pass,
+      name,
+      avatarUrl,
+      course,
+      email,
+      description,
+    } = this.state;
+
     const selectStyles = {
       input: base => ({
         ...base,
@@ -259,7 +281,7 @@ class DotsMobileStepper extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
-            value={this.state.user}
+            value={user}
             fullWidth
             onChange={this.handleChange('user')}
             margin="normal"
@@ -274,7 +296,7 @@ class DotsMobileStepper extends React.Component {
             }}
             placeholder="Ex: ********"
             type="password"
-            value={this.state.pass}
+            value={pass}
             fullWidth
             onChange={this.handleChange('pass')}
             margin="normal"
@@ -282,7 +304,7 @@ class DotsMobileStepper extends React.Component {
           <Select
             className={classes.selectCourse}
             classes={classes}
-            value={this.state.course}
+            value={course}
             options={suggestions}
             components={components}
             styles={selectStyles}
@@ -292,7 +314,7 @@ class DotsMobileStepper extends React.Component {
                 shrink: true,
               },
             }}
-            placeholder="Ex: Direito"
+            placeholder="Ex: Ciência da Computação"
             onChange={this.handleSelectChange}
           />
         </div>
@@ -311,7 +333,7 @@ class DotsMobileStepper extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
-            value={this.state.avatarUrl}
+            value={avatarUrl}
             fullWidth
             onChange={this.handleChange('avatarUrl')}
             margin="normal"
@@ -325,9 +347,23 @@ class DotsMobileStepper extends React.Component {
               shrink: true,
             }}
             placeholder="João"
-            value={this.state.name}
+            value={name}
             fullWidth
             onChange={this.handleChange('name')}
+            margin="normal"
+          />
+          <TextField
+            className={classes.formField}
+            id="email"
+            label="Email"
+            autoComplete="off"
+            placeholder="Ex: joao@gmail.com"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={email}
+            fullWidth
+            onChange={this.handleChange('email')}
             margin="normal"
           />
           <TextField
@@ -339,7 +375,7 @@ class DotsMobileStepper extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
-            value={this.state.description}
+            value={description}
             fullWidth
             onChange={this.handleChange('description')}
             margin="normal"
@@ -362,12 +398,12 @@ class DotsMobileStepper extends React.Component {
             {
               subs.map((s, idx) => (
                 <div key={idx}>
-                  <ListItem className={classes.subItem} button >
+                  <ListItem className={classes.subItem} button>
                     <ListItemText primary={s.name} />
                     <ListItemSecondaryAction>
                       <Checkbox
                         onChange={this.handleToggle(idx)}
-                        checked={this.state.checked.indexOf(idx) !== -1}
+                        checked={this.state.directories.indexOf(idx) !== -1}
                       />
                     </ListItemSecondaryAction>
                   </ListItem>
@@ -388,7 +424,7 @@ class DotsMobileStepper extends React.Component {
 
     return (
       <div>
-        <Topbar back title="Registre-se" withoutNotification/>
+        <Topbar back title="Registre-se" withoutNotification />
 
         {this.renderStep()}
 
@@ -401,7 +437,7 @@ class DotsMobileStepper extends React.Component {
           nextButton={
             <Button
               size="small"
-              onClick={!isFinalStep ? this.handleNext : () => this.props.history.push('/inicio')}
+              onClick={!isFinalStep ? this.handleNext : this.handleSubmit}
               disabled={this.state.activeStep === 5}
             >
               {isFinalStep ? 'Concluir' : 'Próximo'}
@@ -411,7 +447,8 @@ class DotsMobileStepper extends React.Component {
           }
           backButton={
             <Button size="small" onClick={this.handleBack} disabled={this.state.activeStep === 0}>
-              <Icon> keyboard_arrow_left </Icon> Back
+              <Icon>keyboard_arrow_left</Icon>
+              Back
             </Button>
           }
         />

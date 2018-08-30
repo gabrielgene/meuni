@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import Cookies from 'js-cookie';
 
 import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,14 +11,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
-import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import AppSearch from '../app-search';
+// import AppSearch from '../app-search';
 
 const styles = theme => ({
   bar: {
@@ -109,7 +109,7 @@ class Topbar extends Component {
             <Typography variant="title" color="inherit">
               {title}
             </Typography>
-            <AppSearch />
+            {/* <AppSearch /> */}
             {/* <TextField
               defaultValue="react-bootstrap"
               id="bootstrap-input"
@@ -121,7 +121,7 @@ class Topbar extends Component {
                 },
               }}
             /> */}
-            <div className={classes.actions}>
+            {/* <div className={classes.actions}> */}
               {
                 withoutNotification ?
                   <div />
@@ -149,7 +149,7 @@ class Topbar extends Component {
                   </IconButton>
               }
 
-            </div>
+            {/* </div> */}
           </Toolbar>
         </AppBar>
         <Drawer open={open} onClose={this.toggleDrawer}>
@@ -202,6 +202,13 @@ class Topbar extends Component {
                   <Icon>exit_to_app</Icon>
                 </ListItemIcon>
                 <ListItemText primary="Sair" />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemIcon>
+                  <Icon>verified_user</Icon>
+                </ListItemIcon>
+                <ListItemText primary={Cookies.get('userId')} />
               </ListItem>
             </List>
           </div>

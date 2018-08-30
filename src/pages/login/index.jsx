@@ -3,6 +3,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Cookies from 'js-cookie';
+import { login } from '../../fetches';
 
 const styles = theme => ({
   root: {
@@ -20,10 +22,10 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2,
   },
   register: {
+    cursor: 'pointer',
     marginTop: theme.spacing.unit * 12,
   },
 });
-
 
 class Login extends Component {
   state = {
@@ -37,8 +39,11 @@ class Login extends Component {
     });
   };
 
-  onSubmit = () => {
-    this.props.history.push('/inicio')
+  onSubmit = async () => {
+    await login(this.state);
+    const userId = Cookies.get('userId');
+    console.log({ userId })
+    // this.props.history.push('/inicio')
   }
 
   render() {
