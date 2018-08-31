@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { blue, pink } from '@material-ui/core/colors';
+import { withStyles } from '@material-ui/core/styles';
 
 import Login from './pages/login';
 import Home from './pages/home';
@@ -26,24 +27,36 @@ const theme = createMuiTheme({
   },
 });
 
-const App = () => (
-  <MuiThemeProvider theme={theme}>
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/cadastro" component={() => <h1>Test</h1>} />
-        <Route path="/inicio" component={Home} />
-        <Route exact path="/sub/:subId" component={Folder} />
-        <Route path="/post/:postId" component={Post} />
-        <Route path="/registre-se" component={Register} />
-        <Route path="/perfil/:name" component={Profile} />
-        <Route path="/configuracoes" component={Configurations} />
-        <Route path="/notificacoes" component={Notifications} />
-        <Route path="/busca" component={Search} />
-      </Switch>
-    </Router>
-  </MuiThemeProvider>
-)
+const styles = theme => ({
+  root: {
+    [theme.breakpoints.up('md')]: {
+      padding: '0 200px',
+    },
+  },
+});
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const App = ({ classes }) => (
+  // <div className={classes.root}>
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/cadastro" component={() => <h1>Test</h1>} />
+          <Route path="/inicio" component={Home} />
+          <Route exact path="/sub/:subId" component={Folder} />
+          <Route path="/post/:postId" component={Post} />
+          <Route path="/registre-se" component={Register} />
+          <Route path="/perfil/:name" component={Profile} />
+          <Route path="/configuracoes" component={Configurations} />
+          <Route path="/notificacoes" component={Notifications} />
+          <Route path="/busca" component={Search} />
+        </Switch>
+      </Router>
+    </MuiThemeProvider>
+  // </div>
+);
+
+const Enhanced = withStyles(styles, { withTheme: true })(App);
+
+ReactDOM.render(<Enhanced />, document.getElementById('root'));
 registerServiceWorker();

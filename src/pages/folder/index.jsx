@@ -1,6 +1,6 @@
 import React from 'react';
 import Topbar from '../../components/topbar';
-import Post from '../../components/post';
+import Post from '../../components/postItem';
 import { withStyles } from '@material-ui/core/styles';
 import { subs, posts } from '../../utils/fakeData';
 

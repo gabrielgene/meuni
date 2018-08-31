@@ -1,17 +1,16 @@
 import React from 'react';
 import Topbar from '../../components/topbar';
-import PostItem from '../../components/post';
+import PostItem from '../../components/postItem';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
-import { posts, commentsFake } from '../../utils/fakeData';
 
 const styles = theme => ({
   post: {
     backgroundColor: '#f4f4f4',
   },
   root: {
-    marginTop: theme.spacing.unit * 7,
+    marginTop: theme.spacing.unit * 9,
   },
   title: {
     padding: theme.spacing.unit,
@@ -20,7 +19,12 @@ const styles = theme => ({
 });
 
 class Post extends React.Component {
+  state = {
+    loading: true,
+
+  }
   componentDidMount() {
+
     window.scrollTo(0, 0);
   }
 
@@ -28,13 +32,14 @@ class Post extends React.Component {
     const {
       id,
       name,
-      userName,
+      user,
       avatarUrl,
       post,
       likes,
       comments,
-      subid,
-    } = posts[this.props.match.params.postId];
+      folder,
+      folderName,
+    } = this.props;
 
     return (
       <div className={this.props.classes.post}>
@@ -43,12 +48,13 @@ class Post extends React.Component {
           <PostItem
             id={id}
             name={name}
-            userName={userName}
+            userName={user}
             avatarUrl={avatarUrl}
             post={post}
             likes={likes}
             comments={comments}
-            subId={subid}
+            folder={folder}
+            folderName={folderName}
           />
         </div>
         <Typography className={this.props.classes.title} variant="subheading">
@@ -56,7 +62,7 @@ class Post extends React.Component {
         </Typography>
         <Divider />
         <div className={this.props.classes.content}>
-          {
+          {/* {
             commentsFake.map(c => (
               <PostItem
                 key={c.id}
@@ -68,7 +74,7 @@ class Post extends React.Component {
                 comments={c.comments}
               />
             ))
-          }
+          } */}
         </div>
       </div>
     );

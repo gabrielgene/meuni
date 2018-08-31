@@ -13,8 +13,6 @@ import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/core/styles';
 
-import { subs } from '../../utils/fakeData';
-
 const styles = theme => ({
   card: {
     borderBottom: 'border-bottom: 1px solid #0000004a',
@@ -36,10 +34,10 @@ const styles = theme => ({
 });
 
 
-class Post extends React.Component {
+class PostItem extends React.Component {
   state = {
     like: false,
-    number: 7,
+    number: 0,
   };
 
   handleChange = (value, e) => {
@@ -62,8 +60,8 @@ class Post extends React.Component {
   }
 
   openFolder = e => {
-    const { history, subId } = this.props;
-    history.push(`/sub/${subId}`);
+    const { history, folder } = this.props;
+    history.push(`/sub/${folder}`);
     e.stopPropagation();
   }
 
@@ -71,11 +69,11 @@ class Post extends React.Component {
     const {
       classes,
       name,
-      userName,
+      user,
       post,
       comments,
       avatarUrl,
-      subId,
+      folderName,
     } = this.props;
     const { like, number } = this.state;
 
@@ -85,7 +83,7 @@ class Post extends React.Component {
           <div className={classes.cardHeader}>
             <CardHeader
               title={name}
-              subheader={userName}
+              subheader={user}
               avatar={
                 <Avatar src={avatarUrl} alt="image" />
               }
@@ -93,9 +91,7 @@ class Post extends React.Component {
             {name ?
               <Chip
                 className={classes.chip}
-                label={subs[subId].name}
-                // color="secondary"
-                // color="primary"
+                label={folderName}
                 onClick={this.openFolder}
               />
               : <div />
@@ -149,4 +145,4 @@ class Post extends React.Component {
   };
 };
 
-export default withStyles(styles)(withRouter(Post));
+export default withStyles(styles)(withRouter(PostItem));
