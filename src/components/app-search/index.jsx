@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import Icon from '@material-ui/core/Icon';
 import Input from '@material-ui/core/Input';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -8,6 +7,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {
+    width: '100%',
     fontFamily: theme.typography.fontFamily,
     position: 'relative',
     marginRight: theme.spacing.unit * 2,
@@ -20,9 +20,6 @@ const styles = theme => ({
     '& $inputInput': {
       transition: theme.transitions.create('width'),
       width: 220,
-      // '&:focus': {
-      //   width: 170,
-      // },
     },
   },
   search: {
@@ -36,6 +33,7 @@ const styles = theme => ({
   },
   inputRoot: {
     color: 'inherit',
+    width: '100%',
   },
   inputInput: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme
@@ -43,24 +41,29 @@ const styles = theme => ({
   }
 });
 
-const AppSearch = ({ classes, width }) => (
-  <div className={classes.root} style={{ display: 'block', marginLeft: 8*3 }}>
-    {/* <div className={classes.search}>
-      <Icon>search</Icon>
-    </div> */}
-    <Input
-      disableUnderline
-      placeholder="Search…"
-      id="docsearch-input"
-      inputRef={ref => {
-        this.inputRef = ref;
-      }}
-      classes={{
-        root: classes.inputRoot,
-        input: classes.inputInput,
-      }}
-    />
-  </div>
-)
+class AppSearch extends React.Component {
+  componentDidMount() {
+    this.inputRef.focus();
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root} style={{ display: 'block', marginLeft: 8 * 3 }}>
+        <Input
+          disableUnderline
+          placeholder="Search…"
+          id="docsearch-input"
+          inputRef={ref => {
+            this.inputRef = ref;
+          }}
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+        />
+      </div>
+    );
+  }
+};
 
 export default withStyles(styles)(AppSearch);

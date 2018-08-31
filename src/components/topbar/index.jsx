@@ -24,6 +24,9 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  title: {
+    marginLeft: theme.spacing.unit * 3,
+  },
   menuList: {
     width: 250,
   },
@@ -48,18 +51,6 @@ const styles = theme => ({
     padding: '10px 12px',
     width: 'calc(100% - 24px)',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
     '&:focus': {
       borderColor: '#80bdff',
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
@@ -85,7 +76,9 @@ class Topbar extends Component {
 
   render() {
     const {
+      withoutActions,
       back,
+      search,
       menu,
       title,
       classes,
@@ -97,52 +90,36 @@ class Topbar extends Component {
       <div>
         <AppBar position="fixed">
           <Toolbar className={back || menu ? '' : classes.bar}>
-            {
-              back ?
-                <IconButton onClick={() => history.goBack()} color="inherit" aria-label="Menu">
-                  <Icon>arrow_back_ios</Icon>
-                </IconButton>
-                :
-                menu ?
-                  <IconButton
-                    color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
-                    <Icon>menu</Icon>
-                  </IconButton>
-                  :
-                  <div />
+            {back &&
+              <IconButton onClick={() => history.goBack()} color="inherit" aria-label="Menu">
+                <Icon>arrow_back_ios</Icon>
+              </IconButton>
             }
-            <Typography variant="title" color="inherit">
-              {title}
-            </Typography>
-            <AppSearch />
-            {/* <TextField
-              defaultValue="react-bootstrap"
-              id="bootstrap-input"
-              InputProps={{
-                disableUnderline: true,
-                classes: {
-                  root: classes.bootstrapRoot,
-                  input: classes.bootstrapInput,
-                },
-              }}
-            /> */}
-            {/* <div className={classes.actions}> */}
-              {
-                withoutNotification ?
-                  <div />
-                  :
-                  <IconButton
-                    color="inherit"
-                    className={classes.notification}
-                    onClick={() => history.push('/busca')}
-                  >
-                    <Icon>search</Icon>
-                  </IconButton>
-              }
-              {
-                withoutNotification ?
-                  <div />
-                  :
+            {menu &&
+              <IconButton
+                color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
+                <Icon>menu</Icon>
+              </IconButton>
+            }
+            {title &&
+              <Typography variant="title" color="inherit" className={classes.title}>
+                {title}
+              </Typography>
+            }
+            {search && <AppSearch />}
+            {
+              (!withoutActions && !search) &&
+              <div className={classes.actions}>
+                <IconButton
+                  color="inherit"
+                  className={classes.notification}
+                  onClick={() => history.push('/busca')}
+                >
+                  <Icon>search</Icon>
+                </IconButton>
+
+                {
+                  !withoutNotification &&
                   <IconButton
                     color="inherit"
                     className={classes.notification}
@@ -152,9 +129,9 @@ class Topbar extends Component {
                       <Icon>notifications</Icon>
                     </Badge>
                   </IconButton>
-              }
-
-            {/* </div> */}
+                }
+              </div>
+            }
           </Toolbar>
         </AppBar>
         <Drawer open={open} onClose={this.toggleDrawer}>
@@ -191,7 +168,9 @@ class Topbar extends Component {
               </ListItem>
               <ListItem button onClick={() => history.push('/notificacoes')}>
                 <ListItemIcon>
-                  <Icon>notifications</Icon>
+                  <Badge color="secondary" badgeContent={2}>
+                    <Icon>notifications</Icon>
+                  </Badge>
                 </ListItemIcon>
                 <ListItemText primary="Notificações" />
               </ListItem>

@@ -426,7 +426,7 @@ class DotsMobileStepper extends React.Component {
 
     return (
       <div>
-        <Topbar back title="Registre-se" withoutNotification />
+        <Topbar back title="Registre-se" withoutActions />
 
         {this.renderStep()}
 

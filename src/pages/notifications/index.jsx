@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   root: {
-    marginTop: 56,
+    marginTop: 64,
   }
 };
 
@@ -12,7 +12,7 @@ const Notifications = ({ classes }) => (
   <div>
     <Topbar menu title="Notificações" />
     <div className={classes.root}>
-      Notificações
+      <h1>Notificações</h1>
     </div>
   </div>
 );

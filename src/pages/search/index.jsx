@@ -4,15 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   root: {
-    marginTop: 56,
+    marginTop: 64,
   }
 };
 
 const Search = ({ classes }) => (
   <div>
-    <Topbar menu title="Busca" />
+    <Topbar back search/>
     <div className={classes.root}>
-      Busca
+      <h1>Busca</h1>
     </div>
   </div>
 );

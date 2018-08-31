@@ -19,7 +19,7 @@ const Home = ({ match, classes, history }) => (
     <List className={classes.list}>
       <Divider />
       {
-        posts.map( p => (
+        posts.map(p => (
           <Post
             key={p.id}
             id={p.id}
