@@ -21,6 +21,7 @@ export const register = (data) => {
     body: JSON.stringify(data),
   }).then(handleHttpStatus).catch(createErrorHandler({}));
 }
+
 export const login = (data) => {
   return fetch('/login', {
     credentials: 'same-origin',
@@ -31,4 +32,14 @@ export const login = (data) => {
     },
     body: JSON.stringify(data),
   }).then(handleHttpStatus).catch(createErrorHandler({}));
+}
+
+export const getFoldersByCourse = (course) => {
+  return fetch(`/dirs/${course}`, {
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  }).then(handleHttpStatus).catch(createErrorHandler([]));
 }

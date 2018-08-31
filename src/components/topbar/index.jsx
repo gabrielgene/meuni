@@ -17,7 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-// import AppSearch from '../app-search';
+import AppSearch from '../app-search';
 
 const styles = theme => ({
   bar: {
@@ -78,6 +78,11 @@ class Topbar extends Component {
     });
   };
 
+  onExit = () => {
+    Cookies.remove('userId');
+    this.props.history.push('/');
+  }
+
   render() {
     const {
       back,
@@ -109,7 +114,7 @@ class Topbar extends Component {
             <Typography variant="title" color="inherit">
               {title}
             </Typography>
-            {/* <AppSearch /> */}
+            <AppSearch />
             {/* <TextField
               defaultValue="react-bootstrap"
               id="bootstrap-input"
@@ -197,7 +202,7 @@ class Topbar extends Component {
                 <ListItemText primary="Configurações" />
               </ListItem>
               <Divider />
-              <ListItem button onClick={() => history.push('/')}>
+              <ListItem button onClick={this.onExit}>
                 <ListItemIcon>
                   <Icon>exit_to_app</Icon>
                 </ListItemIcon>

@@ -18,26 +18,15 @@ import Divider from '@material-ui/core/Divider';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import { register } from '../../fetches';
+import { register, getFoldersByCourse } from '../../fetches';
 
 import Topbar from '../../components/topbar';
 import { subs } from '../../utils/fakeData';
 
 const suggestions = [
-  { label: 'Ciência da Computação' },
-  { label: 'Direito' },
-  { label: 'Engenharia da Computação' },
-  { label: 'Arquitetura' },
-  { label: 'Sistema da Informação' },
-  { label: 'Redes' },
-  { label: 'Engenharia Civil' },
-  { label: 'Engenharia Ambiental' },
-  { label: 'Engenharia Eletrica' },
-  { label: 'Engenharia Mecânica' },
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label,
-}));
+  { label: 'Ciência da Computação', value: 'ciencia-da-computacao' },
+  { label: 'Direito', value: 'direito' },
+];
 
 const styles = theme => ({
   root: {
@@ -195,10 +184,12 @@ class DotsMobileStepper extends React.Component {
     pass: '',
     name: '',
     avatarUrl: '',
-    course: '',
     email: '',
+    course: '',
     description: '',
-    directories: [0, 3, 5],
+    directories: [],
+    folderList: [],
+    selectCourse: '',
   };
 
   handleNext = () => {
@@ -221,7 +212,8 @@ class DotsMobileStepper extends React.Component {
 
   handleSelectChange = value => {
     this.setState({
-      course: value,
+      selectCourse: value,
+      course: value.value,
     });
   };
 
@@ -242,12 +234,21 @@ class DotsMobileStepper extends React.Component {
   };
 
   handleSubmit = async () => {
-    const user = await register(this.state);
-    console.log({ user })
+    await register(this.state);
     const userId = Cookies.get('userId');
-    console.log({ userId })
-    this.props.history.push('/inicio')
+    if (userId !== undefined) {
+      this.props.history.push('/inicio')
+    } else {
+      console.log('error');
+    }
   };
+
+  setFolderList = async () => {
+    const folders = await getFoldersByCourse(this.state.course);
+    this.setState({
+      folderList: folders.map(f => ({ id: f._id, name: f.name, value: f.slug })),
+    });
+  }
 
   renderStep() {
     const { classes, theme } = this.props;
@@ -256,9 +257,9 @@ class DotsMobileStepper extends React.Component {
       pass,
       name,
       avatarUrl,
-      course,
       email,
       description,
+      selectCourse,
     } = this.state;
 
     const selectStyles = {
@@ -304,7 +305,7 @@ class DotsMobileStepper extends React.Component {
           <Select
             className={classes.selectCourse}
             classes={classes}
-            value={course}
+            value={selectCourse}
             options={suggestions}
             components={components}
             styles={selectStyles}
@@ -321,6 +322,7 @@ class DotsMobileStepper extends React.Component {
       )
 
     } else if (this.state.activeStep === 1) {
+      this.setFolderList();
       return (
         <div className={classes.formWrapper}>
           <Avatar className={classes.avatar} src={this.state.avatarUrl || defaultAvatar} alt="avatar" />
@@ -396,14 +398,14 @@ class DotsMobileStepper extends React.Component {
           <List className={classes.list}>
             <Divider />
             {
-              subs.map((s, idx) => (
-                <div key={idx}>
+              this.state.folderList.map(({ id, name, value }) => (
+                <div key={id}>
                   <ListItem className={classes.subItem} button>
-                    <ListItemText primary={s.name} />
+                    <ListItemText primary={name} />
                     <ListItemSecondaryAction>
                       <Checkbox
-                        onChange={this.handleToggle(idx)}
-                        checked={this.state.directories.indexOf(idx) !== -1}
+                        onChange={this.handleToggle(value)}
+                        checked={this.state.directories.find(d => d === value)}
                       />
                     </ListItemSecondaryAction>
                   </ListItem>

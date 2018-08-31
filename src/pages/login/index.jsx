@@ -42,8 +42,11 @@ class Login extends Component {
   onSubmit = async () => {
     await login(this.state);
     const userId = Cookies.get('userId');
-    console.log({ userId })
-    // this.props.history.push('/inicio')
+    if (userId === undefined) {
+      console.log('senha ou usuario errada');
+    } else {
+      this.props.history.push('/inicio')
+    }
   }
 
   render() {
