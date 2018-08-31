@@ -122,7 +122,7 @@ export const posts = [
     id: 5,
     name: 'Corcel',
     userName: '@corcel',
-    avatarUrl: 'https://scontent.fssa2-1.fna.fbcdn.net/v/t1.0-1/p160x160/11390119_839853519397179_817382636463239679_n.jpg?_nc_cat=0&oh=5cc9b1f790959cc25ded7d3fe4aeeec2&oe=5B830799',
+    avatarUrl: 'https://avatars0.githubusercontent.com/u/22510441?s=460&v=4',
     post: `Lorem Ipsum é simplesmente uma simulação de texto
           da indústria tipográfica e de impressos, e vem sendo
           utilizado desde o século XVI.`,
