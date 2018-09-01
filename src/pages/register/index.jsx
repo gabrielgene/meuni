@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import Cookies from 'js-cookie';
+import { Formik } from 'formik';
+import yup from 'yup';
 
-import { withStyles } from '@material-ui/core/styles';
+import { withIndexStyle } from './styles';
+
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
@@ -23,77 +26,7 @@ import { register, getFoldersByCourse } from '../../fetches';
 import Topbar from '../../components/topbar';
 import { subs } from '../../utils/fakeData';
 
-const suggestions = [
-  { label: 'Ciência da Computação', value: 'ciencia-da-computacao' },
-  { label: 'Direito', value: 'direito' },
-];
-
-const styles = theme => ({
-  root: {
-    width: '100%',
-    position: 'fixed',
-    bottom: 0,
-  },
-  formWrapper: {
-    marginTop: 56,
-    marginBottom: 30,
-    padding: 24,
-  },
-  avatar: {
-    width: 80,
-    height: 80,
-  },
-  selectSubs: {
-    paddingTop: 8,
-    textAlign: 'center',
-  },
-  header: {
-    marginTop: 57,
-  },
-  list: {
-    marginBottom: 50,
-  },
-  input: {
-    display: 'flex',
-    padding: 0,
-  },
-  valueContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flex: 1,
-    alignItems: 'center',
-  },
-  noOptionsMessage: {
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-  },
-  singleValue: {
-    fontSize: 16,
-  },
-  placeholder: {
-    position: 'absolute',
-    left: 2,
-    fontSize: 16,
-  },
-  paper: {
-    marginTop: theme.spacing.unit,
-  },
-  selectCourse: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit,
-  }
-});
-
-function NoOptionsMessage(props) {
-  return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.noOptionsMessage}
-      {...props.innerProps}
-    >
-      Curso não encontrado
-    </Typography>
-  );
-}
+import FirstStep from './first-step';
 
 function inputComponent({ inputRef, ...props }) {
   return <div ref={inputRef} {...props} />;
@@ -170,27 +103,37 @@ const defaultAvatar = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAA
 const components = {
   Option,
   Control,
-  NoOptionsMessage,
+  // NoOptionsMessage,
   Placeholder,
   SingleValue,
   ValueContainer,
   Menu,
 };
 
-class DotsMobileStepper extends React.Component {
-  state = {
-    activeStep: 0,
-    user: '',
-    pass: '',
-    name: '',
-    avatarUrl: '',
-    email: '',
-    course: '',
-    description: '',
-    directories: [],
-    folderList: [],
-    selectCourse: '',
-  };
+class RegistrationForm extends React.Component {
+  constructor (props) {
+    super(props);
+
+    const folder = {
+      id: 42,
+      name: 'nome',
+      value: 'valor',
+    };
+
+    this.state = {
+      activeStep: 0,
+      user: '',
+      pass: '',
+      name: '',
+      avatarUrl: '',
+      email: '',
+      course: '',
+      description: '',
+      directories: [],
+      folderList: [folder],
+      selectCourse: '',
+    };
+  }
 
   handleNext = () => {
     this.setState({
@@ -234,19 +177,29 @@ class DotsMobileStepper extends React.Component {
   };
 
   handleSubmit = async () => {
-    await register(this.state);
-    const userId = Cookies.get('userId');
-    if (userId !== undefined) {
-      this.props.history.push('/inicio')
-    } else {
-      console.log('error');
-    }
+    console.log('handleSubmit ', this.state);
+
+    // await register(this.state);
+    // const userId = Cookies.get('userId');
+    // if (userId !== undefined) {
+    //   this.props.history.push('/inicio')
+    // } else {
+    //   console.log('error');
+    // }
   };
 
   setFolderList = async () => {
-    const folders = await getFoldersByCourse(this.state.course);
+    // const folders = await getFoldersByCourse(this.state.course);
+    const folders = [];
+    const folder = {
+      id: 42,
+      name: 'nome',
+      value: 'valor',
+    };
+
     this.setState({
-      folderList: folders.map(f => ({ id: f._id, name: f.name, value: f.slug })),
+      // folderList: folders.map(f => ({ id: f._id, name: f.name, value: f.slug })),
+      folderList: [folder],
     });
   }
 
@@ -262,67 +215,13 @@ class DotsMobileStepper extends React.Component {
       selectCourse,
     } = this.state;
 
-    const selectStyles = {
-      input: base => ({
-        ...base,
-        color: theme.palette.text.primary,
-      }),
-    };
-
     if (this.state.activeStep === 0) {
       return (
-        <div className={classes.formWrapper}>
-          <div className={classes.avatar} />
-          <TextField
-            className={classes.formField}
-            id="user"
-            label="Usuário"
-            autoComplete="off"
-            placeholder="Ex: gabrielgene"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={user}
-            fullWidth
-            onChange={this.handleChange('user')}
-            margin="normal"
-          />
-          <TextField
-            className={classes.formField}
-            id="pass"
-            label="Senha"
-            autoComplete="off"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            placeholder="Ex: ********"
-            type="password"
-            value={pass}
-            fullWidth
-            onChange={this.handleChange('pass')}
-            margin="normal"
-          />
-          <Select
-            className={classes.selectCourse}
-            classes={classes}
-            value={selectCourse}
-            options={suggestions}
-            components={components}
-            styles={selectStyles}
-            textFieldProps={{
-              label: 'Curso',
-              InputLabelProps: {
-                shrink: true,
-              },
-            }}
-            placeholder="Ex: Ciência da Computação"
-            onChange={this.handleSelectChange}
-          />
-        </div>
+        <FirstStep />
       )
 
     } else if (this.state.activeStep === 1) {
-      this.setFolderList();
+      // this.setFolderList();
       return (
         <div className={classes.formWrapper}>
           <Avatar className={classes.avatar} src={this.state.avatarUrl || defaultAvatar} alt="avatar" />
@@ -419,6 +318,10 @@ class DotsMobileStepper extends React.Component {
     }
   }
 
+  onSubmit(values) {
+    console.log({ values });
+  }
+
   render() {
     const { classes } = this.props;
     const { activeStep } = this.state;
@@ -427,8 +330,20 @@ class DotsMobileStepper extends React.Component {
     return (
       <div>
         <Topbar back title="Registre-se" withoutNotification />
+        <Formik
+          initialValues={{
+            user: '',
+            course: '',
+          }}
+          onSubmit={this.onSubmit}
+          render={({ handleSubmit, values }) => (
+            <form onSubmit={handleSubmit} className="RegistrationForm">
+              {this.renderStep()}
+              <Button onClick={handleSubmit}> submit </Button>
+            </form>
+          )}
+        />
 
-        {this.renderStep()}
 
         <MobileStepper
           variant="dots"
@@ -459,9 +374,8 @@ class DotsMobileStepper extends React.Component {
   }
 }
 
-DotsMobileStepper.propTypes = {
+RegistrationForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(DotsMobileStepper);
+export default withIndexStyle(RegistrationForm);
