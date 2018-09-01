@@ -13,6 +13,8 @@ import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/core/styles';
 
+import Reply from '../reply';
+
 const styles = theme => ({
   card: {
     borderBottom: 'border-bottom: 1px solid #0000004a',
@@ -35,10 +37,15 @@ const styles = theme => ({
 
 
 class PostItem extends React.Component {
-  state = {
-    like: false,
-    number: 0,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      like: false,
+      number: props.likes,
+      reply: false,
+    };
+  }
 
   handleChange = (value, e) => {
     e.stopPropagation()
@@ -48,20 +55,25 @@ class PostItem extends React.Component {
     });
   };
 
-  componentWillMount() {
-    this.setState({
-      number: this.props.likes,
-    });
-  }
-
   openPost = () => {
     const { history, id } = this.props;
-    history.push(`/post/${id}`)
+    history.push(`/post/${id}`);
   }
 
   openFolder = e => {
     const { history, folder } = this.props;
     history.push(`/sub/${folder}`);
+    e.stopPropagation();
+  }
+
+  onClose = () => {
+    this.setState({ reply: false });
+  }
+
+  onReply = e => {
+    this.setState({ reply: true });
+    // const { history, id } = this.props;
+    // history.push(`/comentario/${id}`);
     e.stopPropagation();
   }
 
@@ -74,12 +86,15 @@ class PostItem extends React.Component {
       comments,
       avatarUrl,
       folderName,
+      withoutClick,
     } = this.props;
-    const { like, number } = this.state;
+    const { like, number, reply } = this.state;
+
+    const onClick = withoutClick ? () => { } : this.openPost;
 
     return (
       <div>
-        <Card onClick={this.openPost}>
+        <Card onClick={onClick}>
           <div className={classes.cardHeader}>
             <CardHeader
               title={name}
@@ -128,7 +143,7 @@ class PostItem extends React.Component {
             }
             {
               name ?
-                <Typography className={classes.comment} variant="body2">
+                <Typography className={classes.comment} onClick={this.onReply} variant="body2">
                   <IconButton aria-label="next">
                     <Icon>chat</Icon>
                   </IconButton>
@@ -140,6 +155,7 @@ class PostItem extends React.Component {
           </CardActions>
         </Card>
         <Divider />
+        <Reply open={reply} onClose={this.onClose} />
       </div>
     );
   };
