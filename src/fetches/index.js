@@ -44,6 +44,16 @@ export const getFoldersByCourse = (course) => {
   }).then(handleHttpStatus).catch(createErrorHandler([]));
 }
 
+export const getPostsByFolder = (folder) => {
+  return fetch(`/folder/posts/${folder}`, {
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  }).then(handleHttpStatus).catch(createErrorHandler([]));
+}
+
 export const getPosts = () => {
   return fetch('/posts', {
     credentials: 'same-origin',
