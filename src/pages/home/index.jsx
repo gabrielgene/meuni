@@ -1,6 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import { withRouter } from 'react-router';
 import Cookies from 'js-cookie';
+=======
+import Cookies from 'js-cookie';
+import { withRouter } from 'react-router';
+>>>>>>> e49a1f3492bcc9c3ef0cec95293bd65641f44b68
 
 import List from '@material-ui/core/List';
 import { withStyles } from '@material-ui/core/styles';
