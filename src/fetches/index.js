@@ -53,3 +53,25 @@ export const getPosts = () => {
     },
   }).then(handleHttpStatus).catch(createErrorHandler([]));
 }
+
+export const getPostById = (postId) => {
+  return fetch(`/post/${postId}`, {
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  }).then(handleHttpStatus).catch(createErrorHandler([]));
+}
+
+export const sendReply = (data) => {
+  return fetch('/reply', {
+    credentials: 'same-origin',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }).then(handleHttpStatus).catch(createErrorHandler({}));
+}

@@ -1,6 +1,6 @@
 import React from 'react';
-import Cookies from 'js-cookie';
 import { withRouter } from 'react-router';
+import Cookies from 'js-cookie';
 
 import List from '@material-ui/core/List';
 import { withStyles } from '@material-ui/core/styles';
@@ -29,8 +29,13 @@ class Home extends React.Component {
   };
 
   async componentDidMount() {
-    const posts = await getPosts();
-    this.setState({ posts, loading: false });
+    const userId = Cookies.get('userId');
+    if (userId === undefined) {
+      this.props.history.push('/')
+    } else {
+      const posts = await getPosts();
+      this.setState({ posts, loading: false });
+    }
   }
 
   render() {

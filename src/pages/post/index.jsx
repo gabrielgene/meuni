@@ -1,9 +1,13 @@
 import React from 'react';
-import Topbar from '../../components/topbar';
-import PostItem from '../../components/postItem';
+
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Topbar from '../../components/topbar';
+import PostItem from '../../components/postItem';
+import { getPostById } from '../../fetches';
 
 const styles = theme => ({
   post: {
@@ -16,66 +20,87 @@ const styles = theme => ({
     padding: theme.spacing.unit,
     textAlign: 'center',
   },
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: theme.spacing.unit * 12,
+  }
 });
 
 class Post extends React.Component {
   state = {
     loading: true,
+    post: {},
+    commentList: [],
+  };
 
-  }
-  componentDidMount() {
-
+  async componentDidMount() {
+    const { postId } = this.props.match.params;
+    const post = await getPostById(postId);
+    this.setState({ loading: false, post });
     window.scrollTo(0, 0);
   }
 
   render() {
+    const { classes } = this.props;
+    const { loading, post, commentList } = this.state;
     const {
-      id,
+      _id,
       name,
       user,
       avatarUrl,
-      post,
+      text,
       likes,
       comments,
       folder,
       folderName,
-    } = this.props;
+    } = post;
 
     return (
-      <div className={this.props.classes.post}>
-        <Topbar back title="Postagem" />
-        <div className={this.props.classes.root}>
-          <PostItem
-            id={id}
-            name={name}
-            userName={user}
-            avatarUrl={avatarUrl}
-            post={post}
-            likes={likes}
-            comments={comments}
-            folder={folder}
-            folderName={folderName}
-          />
-        </div>
-        <Typography className={this.props.classes.title} variant="subheading">
-          Comentários
-        </Typography>
-        <Divider />
-        <div className={this.props.classes.content}>
-          {/* {
-            commentsFake.map(c => (
-              <PostItem
-                key={c.id}
-                id={c.id}
-                userName={c.userName}
-                avatarUrl={c.avatarUrl}
-                post={c.post}
-                likes={c.likes}
-                comments={c.comments}
-              />
-            ))
-          } */}
-        </div>
+      <div className={classes.post}>
+        <Topbar back title="Publicação" />
+        {
+          loading ?
+            <div className={classes.loading}>
+              <CircularProgress size={50} color="secondary" />
+            </div>
+            :
+            <div>
+              <div className={classes.root}>
+                <PostItem
+                  withoutClick
+                  id={_id}
+                  name={name}
+                  userName={user}
+                  avatarUrl={avatarUrl}
+                  post={text}
+                  likes={likes}
+                  comments={comments}
+                  folder={folder}
+                  folderName={folderName}
+                />
+              </div>
+              <Typography className={classes.title} variant="subheading">
+                Comentários
+              </Typography>
+              <Divider />
+              <div className={classes.content}>
+                {
+                  commentList.map(c => (
+                    <PostItem
+                      key={c.id}
+                      id={c.id}
+                      userName={c.userName}
+                      avatarUrl={c.avatarUrl}
+                      post={c.post}
+                      likes={c.likes}
+                      comments={c.comments}
+                    />
+                  ))
+                }
+              </div>
+            </div>
+        }
       </div>
     );
   }

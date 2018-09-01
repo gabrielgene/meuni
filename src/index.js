@@ -15,6 +15,7 @@ import Configurations from './pages/configurations';
 import Notifications from './pages/notifications';
 import Search from './pages/search';
 import Post from './pages/post';
+import Reply from './pages/reply';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -36,24 +37,23 @@ const styles = theme => ({
 });
 
 const App = ({ classes }) => (
-  // <div className={classes.root}>
-    <MuiThemeProvider theme={theme}>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/cadastro" component={() => <h1>Test</h1>} />
-          <Route path="/inicio" component={Home} />
-          <Route exact path="/sub/:subId" component={Folder} />
-          <Route path="/post/:postId" component={Post} />
-          <Route path="/registre-se" component={Register} />
-          <Route path="/perfil/:name" component={Profile} />
-          <Route path="/configuracoes" component={Configurations} />
-          <Route path="/notificacoes" component={Notifications} />
-          <Route path="/busca" component={Search} />
-        </Switch>
-      </Router>
-    </MuiThemeProvider>
-  // </div>
+  <MuiThemeProvider theme={theme}>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/cadastro" component={() => <h1>Test</h1>} />
+        <Route path="/inicio" component={Home} />
+        <Route exact path="/sub/:subId" component={Folder} />
+        <Route path="/post/:postId" component={Post} />
+        <Route path="/registre-se" component={Register} />
+        <Route path="/perfil/:name" component={Profile} />
+        <Route path="/configuracoes" component={Configurations} />
+        <Route path="/notificacoes" component={Notifications} />
+        <Route path="/busca" component={Search} />
+        <Route path="/comentario/:postId" component={Reply} />
+      </Switch>
+    </Router>
+  </MuiThemeProvider>
 );
 
 const Enhanced = withStyles(styles, { withTheme: true })(App);
