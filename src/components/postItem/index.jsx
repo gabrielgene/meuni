@@ -62,7 +62,7 @@ class PostItem extends React.Component {
 
   openFolder = e => {
     const { history, folder } = this.props;
-    history.push(`/sub/${folder}`);
+    history.push(`/diretorio/${folder}`);
     e.stopPropagation();
   }
 

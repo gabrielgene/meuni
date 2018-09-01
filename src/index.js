@@ -43,7 +43,7 @@ const App = ({ classes }) => (
         <Route exact path="/" component={Login} />
         <Route path="/cadastro" component={() => <h1>Test</h1>} />
         <Route path="/inicio" component={Home} />
-        <Route exact path="/sub/:subId" component={Folder} />
+        <Route exact path="/diretorio/:folder" component={Folder} />
         <Route path="/post/:postId" component={Post} />
         <Route path="/registre-se" component={Register} />
         <Route path="/perfil/:name" component={Profile} />
