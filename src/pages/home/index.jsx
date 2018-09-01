@@ -1,40 +1,73 @@
 import React from 'react';
-import Topbar from '../../components/topbar';
+import Cookies from 'js-cookie';
+import { withRouter } from 'react-router';
+
 import List from '@material-ui/core/List';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-import { withRouter } from 'react-router';
-import { posts } from '../../utils/fakeData';
-import Post from '../../components/post';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import PostItem from '../../components/postItem';
+import Topbar from '../../components/topbar';
+import { getPosts } from '../../fetches';
 
 const styles = theme => ({
-  list: {
-    marginTop: theme.spacing.unit * 7,
+  root: {
+    marginTop: theme.spacing.unit * 9,
+  },
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: theme.spacing.unit * 3,
   }
 });
 
-const Home = ({ match, classes, history }) => (
-  <div>
-    <Topbar menu title="Feed" />
-    <List className={classes.list}>
-      <Divider />
-      {
-        posts.map(p => (
-          <Post
-            key={p.id}
-            id={p.id}
-            name={p.name}
-            username={p.userName}
-            avatarUrl={p.avatarUrl}
-            post={p.post}
-            likes={p.likes}
-            comments={p.comments}
-            subId={p.subid}
-          />
-        ))
-      }
-    </List>
-  </div>
-)
+class Home extends React.Component {
+  state = {
+    loading: true,
+    posts: [],
+  };
+
+  async componentDidMount() {
+    const posts = await getPosts();
+    this.setState({ posts, loading: false });
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { loading, posts } = this.state;
+    return (
+      <div className={classes.root}>
+        <Topbar menu title="Feed" />
+        {
+          loading ?
+            <div className={classes.loading}>
+              <CircularProgress size={50} color="secondary" />
+            </div>
+            :
+            <List>
+              <Divider />
+              {
+                posts.map(p => (
+                  <PostItem
+                    key={p._id}
+                    id={p._id}
+                    name={p.name}
+                    username={p.user}
+                    avatarUrl={p.avatarUrl}
+                    post={p.text}
+                    likes={p.likes}
+                    comments={p.comments}
+                    folder={p.folder}
+                    folderName={p.folderName}
+                  />
+                ))
+              }
+            </List>
+        }
+      </div>
+    )
+  }
+};
 
 export default withStyles(styles)(withRouter(Home));

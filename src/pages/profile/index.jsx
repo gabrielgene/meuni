@@ -19,7 +19,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
 import Topbar from '../../components/topbar';
-import PostItem from '../../components/post';
+import PostItem from '../../components/postItem';
 import { posts, subs } from '../../utils/fakeData';
 
 const styles = theme => ({
