@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Topbar from '../../components/topbar';
 import PostItem from '../../components/postItem';
-import { getPostById } from '../../fetches';
+import { getPostById, getReplies } from '../../fetches';
 
 const styles = theme => ({
   post: {
@@ -31,19 +31,21 @@ class Post extends React.Component {
   state = {
     loading: true,
     post: {},
-    commentList: [],
+    replies: [],
   };
 
   async componentDidMount() {
     const { postId } = this.props.match.params;
     const post = await getPostById(postId);
-    this.setState({ loading: false, post });
+    const replies = await getReplies(postId);
+    console.log(replies)
+    this.setState({ loading: false, post, replies });
     window.scrollTo(0, 0);
   }
 
   render() {
     const { classes } = this.props;
-    const { loading, post, commentList } = this.state;
+    const { loading, post, replies } = this.state;
     const {
       _id,
       name,
@@ -58,7 +60,7 @@ class Post extends React.Component {
 
     return (
       <div className={classes.post}>
-        <Topbar back title="Publicação" />
+        <Topbar back title="Publicação" search notifications />
         {
           loading ?
             <div className={classes.loading}>
@@ -86,15 +88,13 @@ class Post extends React.Component {
               <Divider />
               <div className={classes.content}>
                 {
-                  commentList.map(c => (
+                  replies.map(r => (
                     <PostItem
-                      key={c.id}
-                      id={c.id}
-                      userName={c.userName}
-                      avatarUrl={c.avatarUrl}
-                      post={c.post}
-                      likes={c.likes}
-                      comments={c.comments}
+                      key={r._id}
+                      user={r.user}
+                      avatarUrl={r.avatarUrl}
+                      likes={r.likes}
+                      comment={r.comment}
                     />
                   ))
                 }
