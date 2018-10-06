@@ -10,7 +10,7 @@ const styles = {
 
 const Search = ({ classes }) => (
   <div>
-    <Topbar back search/>
+    <Topbar back onSearch/>
     <div className={classes.root}>
       <h1>Busca</h1>
     </div>

@@ -32,7 +32,7 @@ class Reply extends React.Component {
       comment: this.state.comment,
       postId: match.params.postId,
     });
-    // this.onClose();
+    this.onClose();
   }
 
   render() {
@@ -45,7 +45,6 @@ class Reply extends React.Component {
           title="Comentar"
           send
           onSend={this.onReply}
-          withoutActions
         />
         <TextField
           id="multiline-flexible"
