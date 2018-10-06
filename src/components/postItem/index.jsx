@@ -13,8 +13,6 @@ import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/core/styles';
 
-import Reply from '../reply';
-
 const styles = theme => ({
   card: {
     borderBottom: 'border-bottom: 1px solid #0000004a',
@@ -42,7 +40,7 @@ class PostItem extends React.Component {
 
     this.state = {
       like: false,
-      number: props.likes,
+      number: props.likes || 0,
       reply: false,
     };
   }
@@ -57,7 +55,7 @@ class PostItem extends React.Component {
 
   openPost = () => {
     const { history, id } = this.props;
-    history.push(`/post/${id}`);
+    history.push(`/post/${id}`, { test: 123 });
   }
 
   openFolder = e => {
@@ -66,14 +64,9 @@ class PostItem extends React.Component {
     e.stopPropagation();
   }
 
-  onClose = () => {
-    this.setState({ reply: false });
-  }
-
   onReply = e => {
-    this.setState({ reply: true });
-    // const { history, id } = this.props;
-    // history.push(`/comentario/${id}`);
+    const { history, id } = this.props;
+    history.push(`/comentario/${id}`);
     e.stopPropagation();
   }
 
@@ -84,11 +77,12 @@ class PostItem extends React.Component {
       user,
       post,
       comments,
+      comment,
       avatarUrl,
       folderName,
       withoutClick,
     } = this.props;
-    const { like, number, reply } = this.state;
+    const { like, number } = this.state;
 
     const onClick = withoutClick ? () => { } : this.openPost;
 
@@ -116,11 +110,11 @@ class PostItem extends React.Component {
             {
               name ?
                 <Typography component="p">
-                  {post}
+                  {post || comment}
                 </Typography>
                 :
                 <Typography component="p" variant="caption">
-                  {post}
+                  {post || comment}
                 </Typography>
             }
           </CardContent>
@@ -155,7 +149,6 @@ class PostItem extends React.Component {
           </CardActions>
         </Card>
         <Divider />
-        <Reply open={reply} onClose={this.onClose} />
       </div>
     );
   };
