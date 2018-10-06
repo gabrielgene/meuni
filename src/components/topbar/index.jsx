@@ -83,10 +83,10 @@ class Topbar extends Component {
       title,
       send,
       classes,
-      onClose,
       close,
       history,
-      withoutNotification,
+      onSearch,
+      notifications,
       onSend,
     } = this.props;
     const { open } = this.state;
@@ -95,7 +95,7 @@ class Topbar extends Component {
         <AppBar position="fixed">
           <Toolbar className={back || menu || close ? '' : classes.bar}>
             {close &&
-              <IconButton onClick={onClose} color="inherit" aria-label="Close">
+              <IconButton onClick={() => history.goBack()} color="inherit" aria-label="Close">
                 <Icon>close</Icon>
               </IconButton>
             }
@@ -105,28 +105,31 @@ class Topbar extends Component {
               </IconButton>
             }
             {menu &&
-              <IconButton
-                color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
+              <IconButton onClick={this.toggleDrawer} color="inherit" aria-label="Menu">
                 <Icon>menu</Icon>
               </IconButton>
             }
+
             {title &&
               <Typography variant="title" color="inherit" className={classes.title}>
                 {title}
               </Typography>
             }
-            {search && <AppSearch />}
+
+
+            {onSearch && <AppSearch />}
+
+
             {
-              ((!withoutActions && !search) || send) &&
+              !withoutActions &&
               <div className={classes.actions}>
-                {
-                  send &&
+
+                {send &&
                   <IconButton onClick={onSend} color="inherit" aria-label="Send">
                     <Icon>send</Icon>
                   </IconButton>
                 }
-                {
-                  search &&
+                {search &&
                   <IconButton
                     color="inherit"
                     className={classes.notification}
@@ -136,8 +139,7 @@ class Topbar extends Component {
                   </IconButton>
                 }
 
-                {
-                  (!withoutNotification && !send) &&
+                {notifications &&
                   <IconButton
                     color="inherit"
                     className={classes.notification}
