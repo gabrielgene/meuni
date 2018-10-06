@@ -75,3 +75,13 @@ export const sendReply = (data) => {
     body: JSON.stringify(data),
   }).then(handleHttpStatus).catch(createErrorHandler({}));
 }
+
+export const getReplies = (postId) => {
+  return fetch(`/replies/${postId}`, {
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  }).then(handleHttpStatus).catch(createErrorHandler([]));
+}
