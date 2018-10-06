@@ -43,7 +43,7 @@ class Home extends React.Component {
     const { loading, posts } = this.state;
     return (
       <div className={classes.root}>
-        <Topbar menu title="Feed" />
+        <Topbar menu title="Feed" notifications search/>
         {
           loading ?
             <div className={classes.loading}>
